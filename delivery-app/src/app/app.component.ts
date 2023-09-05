@@ -9,5 +9,6 @@ export class AppComponent {
   title = 'delivery-app';
   constructor() {
     console.log('shtibel is the kinghggggg');
+    console.log('alex is not the kinghggggg');
   }
 }
