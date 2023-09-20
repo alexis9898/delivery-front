@@ -5,7 +5,7 @@
         <mat-form-field appearance="outline" class="example-full-width">
             <mat-label> שם </mat-label>
             <input matInput required formControlName="username">
-            <mat-error></mat-error>
+            <mat-error>שדה חובה </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -14,7 +14,7 @@
             <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
             <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
-            <mat-error>required</mat-error>
+            <mat-error> שדה חובה </mat-error>
         </mat-form-field>
         <br>
         <p *ngIf="errMessage" class="error-msg">{{errMessage}}</p>

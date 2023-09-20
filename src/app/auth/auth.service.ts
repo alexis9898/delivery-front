@@ -1,36 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, catchError, of, tap, throwError } from 'rxjs';
-import { Roles } from '../enums/roles.enum';
-import { AppUser } from '../models/app-user.model';
+import { Roles } from '../core/enums/roles.enum';
+import { AppUser } from '../core/models/app-user.model';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   userChain = new BehaviorSubject<AppUser | null>(null);
 
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-  ) {
-  }
+  constructor(private http: HttpClient, private router: Router) {}
 
   // url = `https://jltrinpj51.execute-api.eu-north-1.amazonaws.com/Prod/Account`
-  url = `${environment.baseApiUrl}api/auth`
+  url = `${environment.baseApiUrl}/api/Account`;
 
   login(username: string, password: string) {
-    return this.http.post<AppUser>(`${this.url}/login`, {username, password})
-    .pipe(
-      tap(user => {
-        if(user) {
-          this.handleAuth(user);
-        }
-      })
-      ,catchError(error => this.handleAccountsError(error))
-    )
+    return this.http
+      .post<AppUser>(`${this.url}/login`, { username, password })
+      .pipe(
+        tap((user) => {
+          if (user) {
+            this.handleAuth(user);
+          }
+        }),
+        catchError((error) => this.handleAccountsError(error))
+      );
   }
 
   // createInstaller(installer: InstallerDto, password: string) {
@@ -50,50 +47,47 @@ export class AuthService {
   //     )
   // }
 
-
-
   logout() {
     localStorage.removeItem('user');
     this.userChain.next(null);
-    this.router.navigate(['auth'])
+    this.router.navigate(['auth']);
   }
 
   autoLogin() {
-    const userJson = localStorage.getItem('user')
+    const userJson = localStorage.getItem('user');
     if (userJson) {
-      const user = JSON.parse(userJson) as AppUser
-      this.userChain.next(user)
+      const user = JSON.parse(userJson) as AppUser;
+      this.userChain.next(user);
     }
   }
 
   handleAuth(user: AppUser) {
     this.userChain.next(user);
-    localStorage.setItem('user', JSON.stringify(user))
+    localStorage.setItem('user', JSON.stringify(user));
   }
 
   handleAccountsError(error: HttpErrorResponse) {
-    let errMessage = 'בקשה שגויה! אם בעיה זו חוזרת התקשרו 0523452554'
+    let errMessage = 'בקשה שגויה! אם בעיה זו חוזרת התקשרו 0523452554';
+    console.log(error)
+
     if (!error.error || !error.error.message) {
-      return throwError(errMessage)
+      return throwError(errMessage);
     }
-    switch(error.error.message) {
-      case "FAILED_LOGIN":
-        errMessage = "שם משתמש או סיסמא שגויים"
+    switch (error.error.message) {
+      case 'FAILED_LOGIN':
+        errMessage = 'שם משתמש או סיסמא שגויים';
         break;
-      case "FAILED_SIGNUP":
-        errMessage = "שגיאה! לא ניתן להוסיף משתמש"
+      case 'FAILED_SIGNUP':
+        errMessage = 'שגיאה! לא ניתן להוסיף משתמש';
     }
     return throwError(errMessage);
   }
 }
 
-
-
 interface signUp {
-    name:string ,
-    password: string,
-    phone: string,
-    role:string  ,
-    email?: string,
-    // categories?: Category[]
+  name: string;
+  password: string;
+  phone: string;
+  role: string;
+  email?: string;
 }
