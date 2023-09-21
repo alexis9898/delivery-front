@@ -11,7 +11,7 @@ import { ProductsComponent } from './components/products/products.component';
 import { AuthInterceptorService } from './core/interceptors/auth-interceptor.service';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { CustomMatPaginatorIntl } from './shared/modules/hebrew-paginator';
-import { ManageDeliveryComponent } from './component/manage-delivery/manage-delivery.component';
+import { ManageDeliveryComponent } from './components/manage-delivery/manage-delivery.component';
 
 @NgModule({
   declarations: [
