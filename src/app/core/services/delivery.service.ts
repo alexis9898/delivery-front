@@ -7,7 +7,7 @@ import { Delivery } from '../models/delivery';
 @Injectable({
   providedIn: 'root'
 })
-export class CommentService {
+export class DeliveryService {
   url = `${environment.baseApiUrl}/api/delivery`;
   deliveries$ = new BehaviorSubject<Delivery[]>([]);
   constructor(private http: HttpClient,) { }

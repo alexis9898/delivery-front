@@ -12,5 +12,6 @@ export class AppComponent {
   constructor(private authService: AuthService){
     authService.autoLogin();
     console.log("shtibel")
+    console.log("Asd")
   }
 }
