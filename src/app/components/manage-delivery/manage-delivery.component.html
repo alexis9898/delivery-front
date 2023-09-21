@@ -1,1 +1,65 @@
 <p>manage-delivery works!</p>
+<div class="container">
+
+  <div *ngIf="user" class="warapper-edit">
+
+    <div>{{editMode?'update':'add'}}</div>
+    <form [formGroup]="deliveryForm" (submit)="onSubmit()" class="form">
+
+      <!-- <mat-form-field class="example-full-width">
+        <mat-label>customer</mat-label>
+        <input matInput formControlName="customer" name="customer" >
+      </mat-form-field> -->
+
+      <mat-form-field>
+        <mat-label>customer</mat-label>
+        <mat-select formControlName="customer" name="customer">
+          <mat-option   *ngFor="let customer of customers" [value]="customer">
+            {{customer}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>status</mat-label>
+        <mat-select formControlName="status" name="status">
+          <mat-option   *ngFor="let status of status" [value]="status">
+            {{status}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <mat-label>deliveryPersons</mat-label>
+        <mat-select formControlName="deliveryPerson" name="deliveryPerson">
+          <mat-option   *ngFor="let deliveryPerson of products" [value]="location">
+            {{location}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Locaton</mat-label>
+        <mat-select formControlName="location" name="location">
+          <mat-option   *ngFor="let location of products" [value]="location">
+            {{location}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button type="submit" class="submit" mat-raised-button>{{editMode?'update':'add'}}</button>
+    </form>
+    <!-- <button *ngIf="editMode" type="button" (click)="removeCharacter()" class="remove" mat-raised-button>remove</button> -->
+    <!-- <button *ngIf="data?.userId && data?.originalId" (click)="resetOriginalCharaster()" type="button" class="reset" mat-raised-button [color]="">reset character</button> -->
+  </div>
+
+  <div *ngIf="!user" class="no-user">
+    <div class="text">Please Login or Register</div>
+    <div class="text">You can add Your Characters</div>
+    <div class="text">You can also Change the Characters of the seriese</div>
+    <div class="text">Have FUN!!!</div>
+  </div>
+
+</div>
+
