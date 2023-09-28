@@ -29,13 +29,14 @@
 
             <div class="nav-list-wrapper width-10/10">
               <h4> משלוחים </h4>
-              <a mat-list-item routerLink="" >כל המשלוחים</a>
-              <a  mat-list-item >הוספת משלוח</a>
+              <a mat-list-item  >כל המשלוחים</a>
+              <a  mat-list-item [routerLink]="['delivery-manage']">הוספת משלוח</a>
             </div>
 
             <div class="nav-list-wrapper width-10/10" >
               <h4>ניהול</h4>
               <a mat-list-item [routerLink]="['products']" > כל המוצרים </a>
+              <a mat-list-item [routerLink]="['customers']"> כל הלקוחות </a>
               <a mat-list-item   > כל השליחים </a>
               <a mat-list-item routerLink="." >הוספת משתמש</a>
               <a mat-list-item routerLink="." >סטטיסטיקות</a>

@@ -14,8 +14,8 @@
       <mat-form-field>
         <mat-label>customer</mat-label>
         <mat-select formControlName="customer" name="customer">
-          <mat-option   *ngFor="let customer of customers" [value]="customer">
-            {{customer}}
+          <mat-option   *ngFor="let customer of customers" [value]="customer.name">
+            {{customer.name}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -29,24 +29,36 @@
         </mat-select>
       </mat-form-field>
 
-
       <mat-form-field>
-        <mat-label>deliveryPersons</mat-label>
-        <mat-select formControlName="deliveryPerson" name="deliveryPerson">
-          <mat-option   *ngFor="let deliveryPerson of products" [value]="location">
-            {{location}}
-          </mat-option>
+        <mat-label>products</mat-label>
+        <mat-select  multiple>
+          <mat-select-trigger>
+            {{deliveryForm.get('products').value?.[0] || ''}}
+            <span *ngIf="(deliveryForm.get('products').value?.length || 0) > 1" class="example-additional-selection">
+              (+{{(deliveryForm.get('products').value?.length || 0) - 1}} {{deliveryForm.get('products').value?.length === 2 ? 'other' : 'others'}})
+            </span>
+          </mat-select-trigger>
+          <mat-option *ngFor="let products of customers" [value]="products">{{products.name}}</mat-option>
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field>
+      <!-- <mat-form-field>
+        <mat-label>deliveryPersons</mat-label>
+        <mat-select formControlName="deliveryPerson" name="deliveryPerson">
+          <mat-option   *ngFor="let deliveryPerson of deliveryPersons" [value]="location">
+            {{location}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field> -->
+
+      <!-- <mat-form-field>
         <mat-label>Locaton</mat-label>
         <mat-select formControlName="location" name="location">
           <mat-option   *ngFor="let location of products" [value]="location">
             {{location}}
           </mat-option>
         </mat-select>
-      </mat-form-field>
+      </mat-form-field> -->
 
       <button type="submit" class="submit" mat-raised-button>{{editMode?'update':'add'}}</button>
     </form>

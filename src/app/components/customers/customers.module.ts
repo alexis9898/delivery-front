@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductsComponent } from './products.component';
-// import ProductsComponent from './products.component';
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/modules/shared.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from 'src/app/core/interceptors/auth-interceptor.service';
+import { CustomersComponent } from './customers.component';
 
-const routes: Routes = [{ path: '', component: ProductsComponent }];
+const routes: Routes = [{ path: '', component: CustomersComponent }];
 
 @NgModule({
-  declarations: [ProductsComponent],
+  declarations: [CustomersComponent],
   imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
   providers: [
     {
@@ -20,4 +19,4 @@ const routes: Routes = [{ path: '', component: ProductsComponent }];
     },
   ],
 })
-export class ProductsModule {}
+export class CustomerssModule {}

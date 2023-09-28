@@ -9,6 +9,7 @@ import { Delivery } from '../../core/models/delivery';
 import { CustomerService } from '../../core/services/customer.service';
 import { ProductsService } from 'src/app/core/services/products.service';
 import { DeliveryService } from '../../core/services/delivery.service';
+import { Product } from 'src/app/core/models/product';
 
 @Component({
   selector: 'app-manage-delivery',
@@ -28,31 +29,40 @@ export class ManageDeliveryComponent implements OnInit, OnDestroy {
   deliveryForm: FormGroup;
   status: Status;
   customers: Customer[] = [];
-  products: ProductDetail[] = [];
+  productsList: Product[] = [];
   delivery?: Delivery;
 
+  // products= new FormControl('')
+
+
   ngOnInit(): void {
-    this.productsService.productsDetail$.subscribe((products) => {
-      this.products = products;
+    this.productsService.products$.subscribe((products) => {
+      this.productsList = products;
     });
 
     this.customerService.customers$.subscribe((customers) => {
       this.customers = customers;
     });
 
+    this.authService.userChain.subscribe(user=>{
+      this.user=user;
+    });
     this.getArrays();
+    setTimeout(()=>{console.log(this.productsList)},2000);
+    this.initForm();
   }
 
   getArrays() {
-    if (this.products.length == 0)
+    if (this.productsList.length == 0)
       this.productsService.getProducts().subscribe();
 
     if (this.customers.length == 0)
       this.customerService.getCustomers().subscribe();
+
   }
 
   initForm() {
-    let producuts=
+    // let producuts=
     this.deliveryForm = new FormGroup({
       customer: new FormControl(
         this.delivery ? this.delivery.customer.name : '',
@@ -68,10 +78,11 @@ export class ManageDeliveryComponent implements OnInit, OnDestroy {
       manager: new FormControl(this.delivery ? this.delivery.manager.name : '', [
         Validators.required,
       ]),
-      products: new FormArray([]),
+      // products: new FormArray([]),
+      products: new FormControl(''),
     });
 
-    const arrayValuesControl = this.deliveryForm.get('products') as FormArray;
+    //const arrayValuesControl = this.deliveryForm.get('products') as FormArray;
 
     //arrayValuesControl.forEach((control) => arrayValuesControl.push(control));
     // console.log(this.characterForm);

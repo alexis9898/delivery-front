@@ -4,20 +4,20 @@ import { environment } from 'src/environments/environment';
 import { BehaviorSubject, take, tap } from 'rxjs';
 import { Product } from '../models/product';
 import { ProductDetail } from '../models/product-detail-delivery';
+import { Customer } from '../models/customer';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductsService {
-  url = `${environment.baseApiUrl}/api/Product`;
-  products$ = new BehaviorSubject<Product[]>([]);
-  productsDetail$ = new BehaviorSubject<ProductDetail[]>([]);
+export class CustomersService {
+  url = `${environment.baseApiUrl}/api/Customer`;
+  customers$ = new BehaviorSubject<Customer[]>([]);
   constructor(private http: HttpClient,) { }
 
-  getProducts() {
-    return this.http.get<Product[]>(`${this.url}`).pipe(tap(products => {
+  getCustomers() {
+    return this.http.get<Customer[]>(`${this.url}`).pipe(tap(customers => {
       console.log('ggg');
-      this.products$.next(products)
+      this.customers$.next(customers)
     }))
   }
 }
