@@ -11,6 +11,6 @@ export class AppComponent {
 
   constructor(private authService: AuthService){
     authService.autoLogin();
-    console.log("Asd")
+  
   }
 }
