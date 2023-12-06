@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductsComponent } from './products.component';
-// import ProductsComponent from './products.component';
+import { ManageDeliveryComponent } from './manage-delivery.component';
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/modules/shared.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from 'src/app/core/interceptors/auth-interceptor.service';
 
-const routes: Routes = [{ path: '', component: ProductsComponent }];
+const routes: Routes = [{ path: '', component: ManageDeliveryComponent }];
 
 @NgModule({
-  declarations: [ProductsComponent],
+  declarations: [ManageDeliveryComponent],
   imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
   providers: [
     {

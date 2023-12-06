@@ -33,7 +33,7 @@ export class SideNavComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.userChain.pipe(take(1)).subscribe((user) => {
+    this.authService.userChain.pipe().subscribe((user) => {
       if (!user) {
         this.router.navigate(['auth']);
       }

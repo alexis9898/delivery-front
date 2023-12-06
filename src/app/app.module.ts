@@ -12,12 +12,13 @@ import { AuthInterceptorService } from './core/interceptors/auth-interceptor.ser
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { CustomMatPaginatorIntl } from './shared/modules/hebrew-paginator';
 import { ManageDeliveryComponent } from './components/manage-delivery/manage-delivery.component';
+import { CustomersComponent } from './components/customers/customers.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SideNavComponent,
-    ManageDeliveryComponent,
+    // ProductsComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,15 +26,19 @@ import { ManageDeliveryComponent } from './components/manage-delivery/manage-del
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
   ],
   providers: [
     {
       provide: MatPaginatorIntl,
       useClass: CustomMatPaginatorIntl,
     },
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
